@@ -62,7 +62,7 @@ function nextStep() {
     statusDiv.textContent = "Sending data...";
 
     // Send the data to the webhook via fetch using no-cors
-    fetch("https://n8n.seven-health.fun/webhook-test/passo1", {
+    fetch("https://n8n.seven-health.fun/webhook/passo1", {
       method: "POST",
       mode: "no-cors",
       body: JSON.stringify(formData)
