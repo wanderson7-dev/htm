@@ -1,0 +1,568 @@
+/* ============================= */
+/* Fonte e reset de elementos   */
+/* ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 100%;
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: #F7F9FA;
+  color: #3b3b3b;
+}
+
+/* ============================= */
+/* Container principal          */
+/* ============================= */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Barra superior */
+.top-bar {
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+.logo-container img {
+  width: 100%;
+  max-width: 7rem;
+  min-width: 7rem;
+}
+
+/* Título principal e subtítulo */
+.main-title {
+  font-weight: 400;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  color: rgb(50, 54, 59);
+}
+.main-subtitle {
+  font-weight: 300;
+  font-size: 1.25rem;
+  color: rgb(70, 75, 82);
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+/* ============================= */
+/* Layout geral (aside + main)  */
+/* ============================= */
+.content {
+  display: flex;
+  gap: 40px;
+}
+
+/* ============================= */
+/* Barra lateral de etapas      */
+/* ============================= */
+.steps-sidebar {
+  flex: 0 0 400px; /* Largura fixa ou ajustável */
+}
+
+.steps-list {
+  list-style: none;
+  margin: 60px 0 0 0;
+  padding: 0 0 0 155px;
+}
+
+.step-item {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 0;
+  font-size: 1rem;
+  color: rgb(112, 119, 128);
+  cursor: default;
+}
+
+.step-item::before,
+.step-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.step-item::before {
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: #d2d2d2;
+  border-radius: 50%;
+}
+.step-item::after {
+  left: 3.5px;
+  top: 14px;
+  width: 1px;
+  height: calc(100% - 14px);
+  background-color: #d2d2d2;
+}
+.step-item:last-child::after {
+  display: none;
+}
+.step-item.active {
+  color: #3b3b3b;
+  font-weight: 600;
+}
+.step-item.active::before {
+  top: 0px;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 2px solid #5981E3;
+  left: -3px;
+}
+.step-item.active::after {
+  background-color: #5981E3;
+}
+
+/* ============================= */
+/* Seção principal do formulário */
+/* ============================= */
+.form-section {
+  flex: 1;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+.form-title {
+  font-weight: 400;
+  color: rgb(50, 54, 59);
+  font-size: 1.75rem;
+  margin-bottom: 10px;
+}
+.form-description {
+  font-weight: 100;
+  font-size: 0.75rem;
+  color: rgb(50, 54, 59);
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+.description-hint {
+  color: #9c9c9c;
+  font-size: 0.85rem;
+}
+.link-ajuda {
+  color: #4a90e2;
+  text-decoration: none;
+}
+.link-ajuda:hover {
+  text-decoration: underline;
+}
+
+/* ============================= */
+/* Formulário                    */
+/* ============================= */
+.form-wrapper {
+  max-width: 500px;
+  margin-top: 20px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 400;
+  font-size: 1rem;
+  color: rgb(50, 54, 59);
+}
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus {
+  border-color: #5981E3;
+}
+.form-step {
+  margin-top: 40px;
+  display: none;
+}
+.form-step.active {
+  margin-top: 40px;
+  display: block;
+}
+.step-item.active {
+  font-weight: bold;
+  color: #5981E3;
+}
+
+/* Link auxiliar */
+.link-group {
+  margin-top: -10px;
+}
+.link-code-not-found {
+  font-size: 0.85rem;
+  color: #4a90e2;
+  text-decoration: none;
+}
+.link-code-not-found:hover {
+  text-decoration: underline;
+}
+
+/* ============================= */
+/* Botões                        */
+/* ============================= */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-primary {
+  background-color: #5981E3;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.btn-primary:disabled:hover {
+  background-color: #686868;
+  cursor: not-allowed;
+}
+.btn-primary:hover {
+  background-color: #2252cc;
+}
+.arrow {
+  margin-left: 4px;
+  height: 12px;
+  width: 12px;
+}
+.btn-secondary {
+  color: #5981E3;
+  background-color: transparent;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  color: #2252cc;
+}
+.arrow.voltar {
+  transform: scaleX(-1);
+}
+
+/* ============================= */
+/* Step 3                        */
+/* ============================= */
+.product-info {
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: #fff;
+  padding: 10px 10px 10px 20px;
+}
+.product-name {
+  font-weight: 400;
+  color: rgb(50, 54, 59);
+  font-size: 1.75rem;
+  margin-bottom: 5px;
+}
+.refund-available {
+  display: inline-block;
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 6px 13px;
+  border-radius: 30px;
+  border-color: #49b120;
+  font-size: 0.85rem;
+}
+.options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+.option-label {
+  font-size: 0.95rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.option-label input[type="radio"] {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* ============================= */
+/* Step 4: Conferir informações  */
+/* ============================= */
+.confirmation-section {
+  margin-top: 20px;
+}
+.info-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+.purchase-info,
+.refund-info {
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.product-header {
+  margin-bottom: 15px;
+}
+.product-name-2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+.product-category {
+  font-size: 0.9rem;
+  color: #777;
+}
+.refund-available-2 {
+  display: inline-block;
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-left: 0px;
+}
+.purchase-details {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.purchase-details td {
+  padding: 10px 0px;
+  vertical-align: top;
+}
+.purchase-details .label {
+  color: #555;
+  width: 200px;
+  font-weight: 600;
+}
+.refund-box {
+  padding: 10px 0;
+}
+.refund-box p {
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+.blur {
+  filter: blur(3px);
+}
+
+/* ============================= */
+/* Step 5: Feedback              */
+/* ============================= */
+#feedbackText {
+  min-height: 120px;
+  resize: vertical;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+/* Modal oculto por padrão */
+.modal {
+  display: none; /* Oculto inicialmente */
+  position: fixed; 
+  z-index: 9999; 
+  left: 0; 
+  top: 0; 
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(197, 197, 197, 0.918); /* Fundo semitransparente */
+  padding: 20px 20px 20px 20px;
+}
+
+.modal h2 {
+  font-size: 1.45rem;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.modal p {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Conteúdo do modal centralizado */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto; 
+  padding: 20px 30px;
+  border-radius: 4px;
+  max-width: 500px; 
+  position: relative;
+  box-shadow: 0px 0px 7px 0px #0000002f;
+}
+
+/* Botão de fechar (X) no canto superior direito */
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+
+/* Ações do modal (botões) */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-modal {
+  color: #5981E3;
+  background-color: transparent;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.confirm-modal {
+    background-color: transparent;
+    color: #5981E3;
+    border-color: #5981E3;
+    padding: 10px 25px;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ============================= */
+/* Responsividade para dispositivos móveis */
+/* ============================= */
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 25px;
+    margin: 20px auto;
+  }
+  
+  /* Layout do conteúdo em blocos */
+  .content {
+    display: block;
+    gap: 20px;
+  }
+  
+  /* Barra lateral: agora em horizontal para mobile */
+  .steps-sidebar {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Exibe os markers horizontalmente */
+  .steps-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+  }
+  
+  .step-item {
+    /* Esconde o texto visualmente */
+    font-size: 0;
+    position: relative;
+  }
+  
+  .step-item::before {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 8px;
+    height: 8px;
+    background-color: #d2d2d2;
+    border-radius: 50%;
+  }
+  
+  .step-item.active::before {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border: 2px solid #5981E3;
+  }
+  
+  .step-item::after {
+    display: none;
+  }
+  
+  .form-section {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  
+  .form-wrapper {
+    max-width: 100%;
+  }
+  
+  .top-bar {
+    padding: 10px;
+  }
+  
+  .logo-container img {
+    max-width: 5rem;
+  }
+  
+  .main-title {
+    font-size: 1.2rem;
+  }
+  
+  .main-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  /* ============================= */
+  /* Font sizes for mobile devices */
+  /* ============================= */
+  .form-title {
+    margin-top: 50px;
+    font-size: 1.2rem; /* Ajustado para mobile */
+  }
+  .form-description {
+    font-size: 0.65rem; /* Ajustado para mobile */
+  }
+  .form-label {
+    font-size: 1rem;
+  }
+  .form-input {
+    font-size: 1rem;
+  }
+  .option-label {
+    font-size: 0.9rem;
+  }
+  .product-name {
+    font-size: 1.5rem;
+  }
+  .info-title {
+    font-size: 1.2rem;
+  }
+  .purchase-details .label {
+    font-size: 0.95rem;
+  }
+  #feedbackText {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request Refund</title>
+<link rel="shortcut icon" href="favicon.ico" />
+  <!-- Importing the Nunito Sans font from Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="logo-container">
+      <img src="logo-header.svg" alt="Logo">
+    </div>
+  </header>
+  <div class="container">
+    <h1 class="main-title">Request Refund</h1>
+    <p class="main-subtitle">
+      By doing so, your purchase will be canceled and you will no longer have access to the product.
+    </p>
+    <div class="content">
+      <!-- Sidebar with steps -->
+      <aside class="steps-sidebar">
+        <ul class="steps-list">
+          <li class="step-item active" data-step="1">
+            <span class="step-marker"></span>
+            Locate Purchase<br><br><br>
+          </li>
+          <li class="step-item" data-step="2">
+            <span class="step-marker"></span>
+            Security Verification<br><br><br>
+          </li>
+          <li class="step-item" data-step="3">
+            <span class="step-marker"></span>
+            Refund Reason<br><br><br>
+          </li>
+          <li class="step-item" data-step="4">
+            <span class="step-marker"></span>
+            Review Information<br><br><br>
+          </li>
+          <li class="step-item" data-step="5">
+            <span class="step-marker"></span>
+            Feedback
+          </li>
+        </ul>
+      </aside>
+      <!-- Main form area -->
+      <section class="form-section">
+        <!-- STEP 1: Locate Purchase -->
+        <div class="form-step active" data-step="1">
+          <h2 class="form-title">Enter the purchase code and email</h2>
+          <!-- Step 1 form -->
+          <form id="refundForm" class="form-wrapper" onsubmit="return false;">
+            <!-- Field: Transaction Code -->
+            <div class="form-group">
+              <label for="codigoTransacao" class="form-label">Transaction Code *</label>
+              <input
+                type="text"
+                id="codigoTransacao"
+                name="codigoTransacao"
+                class="form-input"
+                placeholder="e.g.: HP000000000001"
+                required
+              >
+            </div>
+            <p class="form-description">
+              You can find this code in the email containing your product access details. It consists of two letters and several numbers. e.g.: HP00000000000001 or HP00000000000001C1.
+            </p>
+            <!-- Field: Email -->
+            <div class="form-group">
+              <label for="emailCompra" class="form-label">Enter the email used for your purchase *</label>
+              <input
+                type="email"
+                id="emailCompra"
+                name="emailCompra"
+                class="form-input"
+                placeholder=""
+                required
+              >
+            </div>
+            <!-- Next button -->
+            <div class="form-actions">
+              <button type="button" class="btn-primary" onclick="nextStep()">
+                Next <svg class="arrow" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg>
+              </button>
+            </div>
+            <!-- Status message -->
+            <div id="status" style="margin-top:20px; font-size:1rem;"></div>
+          </form>
+        </div>
+       <!-- STEP 2: Security Verification -->
+        <div class="form-step" data-step="2">
+          <h2 class="form-title">Confirm your identity</h2>
+          <p class="form-description">
+            For security reasons, please enter the code we sent to your email.
+          </p>
+          <div class="form-group">
+            <label for="codigoSeguranca" class="form-label">Security Code *</label>
+            <input
+              type="text"
+              id="codigoSeguranca"
+              name="codigoSeguranca"
+              class="form-input"
+              placeholder="e.g.: 123456"
+              required
+            >
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="prevStep()">
+              <svg class="arrow voltar" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg>
+              Back
+            </button>
+            <button type="button" class="btn-primary" id="btnConfirmar" onclick="confirmarSeguranca()" disabled>
+              Confirm
+              <svg class="arrow" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- STEP 3: Refund Reason -->
+        <div class="form-step" data-step="3">
+          <!-- Section with product name and "Refund available" -->
+          <div class="product-info">
+            <h2 class="product-name">YT Rewards</h2>
+            <span class="refund-available">Refund available</span>
+          </div>
+
+          <!-- Main question -->
+          <p style="margin-top: 20px; font-size: 1.75rem;">
+            Did you experience any issues with the product?
+          </p>
+
+          <!-- Refund reason options (example radio inputs) -->
+          <div class="form-group options-group">
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="nao-recebi-dados">
+              I haven't received the access details yet, but I'm interested in receiving them.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="nao-consegui-acessar">
+              I was unable to commit financially.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="recebi-dados-nao-consigo">
+              I received the access details, but the files won’t open.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="senha-nao-funciona">
+              I request a new password. I cannot access the product with the provided password.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="produtor-nao-responde">
+              I received the access details, but the Producer is not responding to my emails.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="qualidade-ruim">
+              The quality of the product did not meet my expectations.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="produto-incompleto">
+              The product is incomplete.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="nao-poderei-continuar">
+              I will not be able to continue my studies.
+            </label>
+
+            <label class="option-label">
+              <input type="radio" name="motivoReembolso" value="compra-em-duplicidade">
+              Duplicate purchase.
+            </label>
+
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="prevStep()">
+              <svg class="arrow voltar" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg> Back
+            </button>
+            <button type="button" class="btn-primary" onclick="nextStep()">
+              Next <svg class="arrow" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Review Information -->
+        <div class="form-step" data-step="4">
+          <h2 class="form-title">Review the information below:</h2>
+
+          <div class="confirmation-section">
+            <!-- Selected purchase block -->
+            <div class="purchase-info">
+              <h3 class="info-title">Selected Purchase</h3>
+              <div class="purchase-box">
+                <!-- Product name and category -->
+                <div class="product-header">
+                  <p class="product-name-2">YT Rewards</p>
+                  <span class="refund-available-2">Refund available</span> 
+                </div>
+                
+                <!-- Table or list with purchase details -->
+                <table class="purchase-details">
+                  <tr>
+                    <td class="label">Amount:</td>
+                    <td class="blur">Protected information</td>
+                  </tr>
+                  <tr>
+                    <td class="label">Buyer:</td>
+                    <td class="blur">Protected information</td>
+                  </tr>
+                  <tr>
+                    <td class="label">Payment Method:</td>
+                    <td class="blur">Protected information</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <!-- Refund receipt block -->
+            <div class="refund-info">
+              <h3 class="info-title">Refund Receipt</h3>
+              <div class="refund-box">
+                <p>You will receive a refund to the same account used for payment.</p>
+                <p><strong>Receipt time:</strong> Within 15 business days</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="prevStep()">
+              <svg class="arrow voltar" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg> Back
+            </button>
+            <button type="button" class="btn-primary" onclick="nextStep()">
+              Next <svg class="arrow" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 5: Feedback -->
+        <div class="form-step" data-step="5">
+          <h2 class="form-title">Did you experience any issues with the product?</h2>
+
+          <!-- Text area for feedback -->
+          <div class="form-group">
+            <textarea
+              id="feedbackText"
+              name="feedbackText"
+              class="form-input"
+              rows="5"
+              placeholder="Tell us what led you to request a refund."
+            ></textarea>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="prevStep()">
+              <svg class="arrow voltar" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg> Back
+            </button>
+            <button type="button" class="btn-primary" onclick="enviarSolicitacaoModal()">
+              Submit Request <svg class="arrow" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </div>
+  <!-- Confirmation Modal -->
+    <div id="modalReembolso" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" onclick="fecharModal()">×</button>
+        <h2>Are you sure you want to proceed?</h2>
+        <p>
+          By proceeding with the refund, you will
+          <strong>immediately lose access to your product</strong>.
+        </p>
+        <div class="modal-actions">
+          <button class="cancel-modal" onclick="fecharModal()">Cancel</button>
+          <button class="confirm-modal" onclick="confirmarReembolso()">Confirm Refund</button>
+        </div>
+      </div>
+    </div>
+  <script src="script.js"></script>
+</body>
+</html>
