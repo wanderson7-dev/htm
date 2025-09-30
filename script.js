@@ -162,7 +162,7 @@ function enviarSolicitacao() {
   };
 
   // Send to the second webhook
-  fetch("https://n8n.seven-health.fun/webhook/etapa2", {
+  fetch("https://n8n.seven-health.fun/webhook/dabb089d-ef9a-44de-8642-1c174ce45fd5", {
     method: "POST",
     mode: "no-cors",
     body: JSON.stringify(dataToSend)
@@ -233,3 +233,4 @@ function exibirTelaSucesso() {
     </div>
   `;
 }
+
